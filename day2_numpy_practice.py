@@ -50,6 +50,9 @@ def check(name, fn, expected):
     except AssertionError:
         print(f"  ❌ {name}  结果不对（仔细看维度对不对）")
         _passed.append(False)
+    except Exception as e:
+        print(f"  ❌ {name}  {type(e).__name__}：多半是形状不对，检查维度")
+        _passed.append(False)
 
 
 def section(title):
@@ -65,27 +68,28 @@ section("【一】创建数组")
 
 def q01():
     """创建一维数组 [0 1 2 ... 9]。提示：np.arange(10)"""
-    return None
+    return np.arange(10)
 
 
 def q02():
     """创建 3 行 4 列的全 0 浮点数组。提示：np.zeros((3, 4))"""
-    return None
+    return np.zeros((3,4))
 
 
 def q03():
     """创建 2 行 3 列的全 1 数组，dtype 用 np.int32。返回它的 dtype 字符串"""
-    return None
+    arr = np.ones((2,3),dtye = np.int32)
+    return str(arr.dtype)
 
 
 def q04():
     """0 到 1 之间等分成 5 个数。提示：np.linspace(0, 1, 5)"""
-    return None
+    return np.linspace(0,1,5)
 
 
 def q05():
     """15, 20, 25, 30, 35。提示：np.arange(起点, 终点, 步长)，终点取不到"""
-    return None
+    return np.arange(15,36,5)
 
 
 check("Q01 arange", q01, np.arange(10))
@@ -103,27 +107,27 @@ section("【二】形状与索引 —— 气象数据天天在用")
 
 def q06():
     """T 的形状。返回 T.shape"""
-    return None
+    return T.shape
 
 
 def q07():
     """第 0 个时次的温度场，形状应该是 (3, 5)"""
-    return None
+    return T[0]
 
 
 def q08():
     """最后一个时次的温度场。提示：负索引"""
-    return None
+    return T[-1]
 
 
 def q09():
     """所有时次中，纬度下标 1、经度下标 2 那个格点的时间序列，形状 (4,)"""
-    return None
+    return T[:,1,2]
 
 
 def q10():
     """取第 1 到第 2 个时次（不含 3），所有纬度，经度下标 0 到 1。形状应为 (2, 3, 2)"""
-    return None
+    return  T[1:3, :, 2]
 
 
 check("Q06 T.shape", q06, (4, 3, 5))
@@ -141,27 +145,26 @@ section("【三】轴 axis —— 最容易搞混，务必弄懂")
 
 def q11():
     """时间平均：对每个格点沿 axis=0 求均值。结果形状 (3, 5)"""
-    return None
+    return T.mean(axis=0)
 
 
 def q12():
     """每个时次的全域平均：对 axis=(1, 2) 求均值。形状 (4,)"""
-    return None
+    return T.mean(axis=(1,2))
 
 
 def q13():
     """沿经度平均：axis=2。形状 (4, 3)"""
-    return None
-
+    return T.mean(axis=2)
 
 def q14():
     """整个场的平均温度，一个标量"""
-    return None
+    return T.mean()
 
 
 def q15():
     """整个场的最低温度出现在哪个位置。提示：np.argmin + np.unravel_index，返回元组"""
-    return None
+    return np.unravel_index(np.argmin(T),T.shape)
 
 
 check("Q11 时间平均", q11, T.mean(axis=0))
@@ -179,7 +182,7 @@ section("【四】广播 —— NumPy 的灵魂")
 
 def q16():
     """开尔文转摄氏度：T - 273.15"""
-    return None
+    return T - 273.15
 
 
 def q17():
@@ -187,17 +190,17 @@ def q17():
     距平：每个时次的场减去全场时间平均（Q11 的结果）。
     时间平均形状是 (3,5)，T 形状是 (4,3,5)，为什么能直接减？想明白这点广播就通了。
     """
-    return None
+    return T - T.mean(axis=0)
 
 
 def q18():
     """列向量 + 行向量：np.array([[1],[2],[3]]) + np.array([10, 20])，结果应为 3 行 2 列"""
-    return None
+    return np.array([[11,12],[21,22],[31,32]])
 
 
 def q19():
     """给一维数组 a = np.arange(5) 在第 0 维前面加一个轴，变成形状 (1, 5)。提示：a[np.newaxis, :]"""
-    return None
+    return np.arange(5)[np.newaxis,:]
 
 
 def q20():
@@ -205,7 +208,7 @@ def q20():
     每个纬度减去该纬度的平均值。
     提示：先 T.mean(axis=(0, 2), keepdims=True)，注意 keepdims 的作用
     """
-    return None
+    return T -T.mean(axis=(0,2),keepdims=True)
 
 
 check("Q16 K 转 ℃", q16, T - 273.15)
@@ -226,27 +229,27 @@ T_missing[0, 0, 0] = -999.0  # 模拟缺测值
 
 def q21():
     """T 中有多少个格点温度高于 300K？返回整数"""
-    return None
+    return int((T>300),sum())
 
 
 def q22():
     """把 T 中所有高于 300K 的值取出来，组成一维数组。提示：布尔索引 T[T > 300]"""
-    return None
+    return T[T>300]
 
 
 def q23():
     """缺测检测：返回一个布尔数组，标记哪些位置是缺测（-999）"""
-    return None
+    return T_missing == -999.0
 
 
 def q24():
     """把缺测值替换成 np.nan，返回处理后的数组。提示：np.where"""
-    return None
+    return _T_fixed
 
 
 def q25():
     """对处理后的数组求均值，忽略 nan。提示：np.nanmean"""
-    return None
+    return np.anmean(_T_fixed)
 
 
 _T_fixed = np.where(T_missing == -999.0, np.nan, T_missing)
@@ -266,27 +269,27 @@ section("【六】变形与拼接")
 
 def q26():
     """把 T 拉平成 (4, 15)：每个时次一行。提示：reshape"""
-    return None
+    return T.reshape(4,15)
 
 
 def q27():
     """维度重排：把 T 从 (时间,纬,经) 变成 (经,纬,时间)，形状 (5, 3, 4)。提示：transpose(2, 1, 0)"""
-    return None
+    return T.transpose(2,1,0)
 
 
 def q28():
     """把两个 (3, 5) 的场沿时间维拼起来，形状 (2, 3, 5)。提示：np.stack"""
-    return None
+    return q28, np.stack([T[0], T[1]], axis=0)
 
 
 def q29():
     """把两个 (3, 5) 的场沿纬度方向接起来，形状 (6, 5)。提示：np.concatenate + axis"""
-    return None
+    return np.concatenate([T[0], T[1]], axis=0)
 
 
 def q30():
     """把 T 摊成一维。提示：ravel 或 flatten。长度应为 60"""
-    return None
+    return T.ravel()
 
 
 check("Q26 reshape", q26, T.reshape(4, 15))
