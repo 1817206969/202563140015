@@ -1,0 +1,6 @@
+{
+    "python.defaultInterpreterPath": "C:\\Users\\18172\\miniconda3\\envs\\ai-met\\python.exe",
+    "python.terminal.activateEnvironment": true,
+    "jupyter.kernelSpecs": [],
+    "files.autoSave": "afterDelay"
+}
