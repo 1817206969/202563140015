@@ -5,5 +5,16 @@
         "python": "C:/Users/18172/miniconda3/envs/ai-met/python.exe -u"
     },
     "code-runner.runInTerminal": true,
+    "terminal.integrated.defaultProfile.windows": "ai-met",
+    "terminal.integrated.profiles.windows": {
+        "ai-met": {
+            "path": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+            "args": [
+                "-NoExit",
+                "-Command",
+                "& 'C:\\Users\\18172\\miniconda3\\shell\\condabin\\conda-hook.ps1'; conda activate ai-met"
+            ]
+        }
+    },
     "files.autoSave": "afterDelay"
 }
