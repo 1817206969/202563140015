@@ -78,7 +78,7 @@ def q02():
 
 def q03():
     """创建 2 行 3 列的全 1 数组，dtype 用 np.int32。返回它的 dtype 字符串"""
-    arr = np.ones((2,3),dtye = np.int32)
+    arr = np.ones((2,3),dtype = np.int32)
     return str(arr.dtype)
 
 
@@ -127,7 +127,7 @@ def q09():
 
 def q10():
     """取第 1 到第 2 个时次（不含 3），所有纬度，经度下标 0 到 1。形状应为 (2, 3, 2)"""
-    return  T[1:3, :, 2]
+    return  T[1:3, :, :2]
 
 
 check("Q06 T.shape", q06, (4, 3, 5))
@@ -229,7 +229,7 @@ T_missing[0, 0, 0] = -999.0  # 模拟缺测值
 
 def q21():
     """T 中有多少个格点温度高于 300K？返回整数"""
-    return int((T>300),sum())
+    return int((T>300).sum())
 
 
 def q22():
@@ -249,7 +249,7 @@ def q24():
 
 def q25():
     """对处理后的数组求均值，忽略 nan。提示：np.nanmean"""
-    return np.anmean(_T_fixed)
+    return np.nanmean(_T_fixed)
 
 
 _T_fixed = np.where(T_missing == -999.0, np.nan, T_missing)
@@ -279,7 +279,7 @@ def q27():
 
 def q28():
     """把两个 (3, 5) 的场沿时间维拼起来，形状 (2, 3, 5)。提示：np.stack"""
-    return q28, np.stack([T[0], T[1]], axis=0)
+    return np.stack([T[0], T[1]], axis=0)
 
 
 def q29():
