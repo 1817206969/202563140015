@@ -1,6 +1,9 @@
 {
-    "python.defaultInterpreterPath": "C:\\Users\\18172\\miniconda3\\envs\\ai-met\\python.exe",
+    "python.defaultInterpreterPath": "C:/Users/18172/miniconda3/envs/ai-met/python.exe",
     "python.terminal.activateEnvironment": true,
-    "jupyter.kernelSpecs": [],
+    "code-runner.executorMap": {
+        "python": "C:/Users/18172/miniconda3/envs/ai-met/python.exe -u"
+    },
+    "code-runner.runInTerminal": true,
     "files.autoSave": "afterDelay"
 }
