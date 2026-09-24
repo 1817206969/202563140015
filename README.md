@@ -15,6 +15,9 @@
 
 - **2026-09-16**：环境配好（conda 环境 `ai-met`，Python 3.11）；首次提交；
   ERA5 第一份数据下载成功（2026-01-01 东亚 2m 温度）并出图
+- **2026-09-17**：Day 2 NumPy 练习 30/30（轴、广播、布尔索引、缺测）；
+  Day 3 Pandas 练习开工（`day3_pandas_practice.py` + 站点观测数据
+  `stations_obs.csv`，4 站 × 90 天 × 360 行）
 
 ## 目录说明
 
@@ -24,3 +27,7 @@
 | `第1周任务卡-9.17至9.22.md` | 逐日任务、网课资源、避坑 |
 | `era5_first_look.py` | ERA5 下载 + 出图脚本（第一个可复现的东西） |
 | `era5_first_figure.png` | 第一张真实数据图 |
+| `day2_numpy_practice.py` | Day 2 NumPy 30 题，带自动判分（已全对） |
+| `day3_pandas_practice.py` | Day 3 Pandas 30 题，带自动判分 |
+| `stations_obs.csv` | 练习数据：4 站点 2025 年 1–3 月逐日观测（含 -999 缺测） |
+| `run.bat` | 双击即可用 ai-met 环境跑脚本，绕开 VS Code 解释器问题 |
