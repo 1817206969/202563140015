@@ -5,3 +5,6 @@ __pycache__/
 .ipynb_checkpoints/
 _*.json
 _*.txt
+_*.py
+_*.png
+.idea/
